@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Buena Vida by Me — Blog de lifestyle, bienestar y desarrollo personal. Hábitos, libertad financiera y emprendimiento digital.">
+<meta property="og:title" content="Buena Vida by Me">
+<meta property="og:description" content="Lifestyle · Bienestar · Emprendimiento Digital">
+<meta property="og:type" content="website">
+<title>Buena Vida by Me</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #FAF9F6;
+  --ink: #1A1A18;
+  --muted: #7A7A74;
+  --accent: #B5A48A;
+  --accent-light: #EDE8DF;
+  --gold: #C9A84C;
+  --gold-light: #F5EDD8;
+  --border: rgba(26,26,24,0.10);
+  --white: #FFFFFF;
+}
+body { font-family: Georgia, 'Times New Roman', serif; background: var(--cream); color: var(--ink); font-size: 15px; line-height: 1.7; }
+.sans { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; border-bottom: 0.5px solid var(--border); background: var(--cream); position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-size: 20px; font-weight: 400; }
+.nav-logo span { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-family: -apple-system, sans-serif; transition: color 0.2s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-cta { background: var(--ink); color: var(--white); padding: 8px 18px; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none; font-family: -apple-system, sans-serif; }
+
+/* HERO */
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: 520px; }
+.hero-left { padding: 70px 56px 70px 40px; display: flex; flex-direction: column; justify-content: center; border-right: 0.5px solid var(--border); }
+.hero-tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; font-family: -apple-system, sans-serif; }
+.hero-title { font-size: 48px; font-weight: 400; line-height: 1.1; margin-bottom: 20px; }
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-subtitle { font-size: 16px; color: var(--muted); max-width: 380px; margin-bottom: 32px; font-family: -apple-system, sans-serif; font-weight: 300; line-height: 1.75; }
+.hero-cats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+.cat-pill { font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; font-family: -apple-system, sans-serif; color: var(--muted); background: var(--white); cursor: pointer; }
+.cat-pill.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.hero-actions { display: flex; gap: 16px; align-items: center; }
+.btn-primary { background: var(--ink); color: var(--white); padding: 12px 26px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; font-family: -apple-system, sans-serif; }
+.btn-ghost { font-size: 13px; color: var(--muted); font-family: -apple-system, sans-serif; text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; }
+.hero-right { display: flex; align-items: stretch; overflow: hidden; min-height: 400px; }
+.hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+/* STRIP */
+.strip { display: flex; padding: 0 40px; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); overflow-x: auto; }
+.strip-item { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-right: 0.5px solid var(--border); white-space: nowrap; cursor: pointer; transition: background 0.15s; flex-shrink: 0; text-decoration: none; }
+.strip-item:first-child { padding-left: 0; }
+.strip-item:last-child { border-right: none; }
+.strip-item:hover { background: var(--accent-light); }
+.strip-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.strip-name { font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+/* AD */
+.ad-bar { border: 0.5px solid var(--border); padding: 14px 22px; display: flex; align-items: center; justify-content: space-between; background: var(--white); }
+.ad-bar p { font-size: 13px; color: var(--muted); font-family: -apple-system, sans-serif; }
+.ad-bar p strong { color: var(--ink); font-weight: 500; }
+.ad-tag { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; background: rgba(26,26,24,0.06); padding: 4px 10px; color: var(--muted); font-family: -apple-system, sans-serif; }
+
+/* FEATURED */
+.featured { display: grid; grid-template-columns: 1.4fr 0.6fr; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+.feat-img { display: flex; align-items: stretch; min-height: 340px; position: relative; overflow: hidden; border-right: 0.5px solid var(--border); }
+.feat-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.feat-badge { position: absolute; top: 20px; left: 20px; background: var(--gold); color: #fff; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; font-family: -apple-system, sans-serif; font-weight: 500; z-index: 2; }
+.feat-content { padding: 48px 40px; display: flex; flex-direction: column; justify-content: center; }
+.feat-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-family: -apple-system, sans-serif; margin-bottom: 14px; }
+.feat-title { font-size: 26px; font-weight: 400; line-height: 1.25; margin-bottom: 14px; }
+.feat-excerpt { font-size: 14px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.75; margin-bottom: 22px; }
+.read-link { font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.05em; border-bottom: 1px solid; padding-bottom: 1px; text-decoration: none; }
+
+/* POSTS */
+.section { padding: 60px 40px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 36px; }
+.section-title { font-size: 26px; font-weight: 400; }
+.section-link { font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; font-family: -apple-system, sans-serif; }
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.post-card { cursor: pointer; }
+.post-img { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-bottom: 16px; }
+.post-img-circle { width: 50%; height: 50%; border-radius: 50%; transition: transform 0.35s; }
+.post-card:hover .post-img-circle { transform: scale(1.1); }
+.post-cat-tag { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-family: -apple-system, sans-serif; margin-bottom: 7px; display: block; }
+.post-title-txt { font-size: 17px; line-height: 1.35; font-weight: 400; margin-bottom: 8px; }
+.post-excerpt { font-size: 13px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.7; margin-bottom: 10px; }
+.post-meta { font-size: 11px; color: var(--muted); font-family: -apple-system, sans-serif; letter-spacing: 0.03em; margin-bottom: 8px; display: block; }
+
+/* AFFILIATE */
+.aff-section { background: var(--ink); color: var(--white); padding: 60px 40px; }
+.aff-tag-lbl { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-family: -apple-system, sans-serif; margin-bottom: 10px; display: block; }
+.aff-title { font-size: 30px; font-weight: 400; margin-bottom: 0; }
+.aff-tabs { display: flex; border-bottom: 0.5px solid rgba(255,255,255,0.1); margin-bottom: 36px; margin-top: 24px; }
+.aff-tab { font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); padding: 10px 20px 10px 0; border-bottom: 2px solid transparent; cursor: pointer; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; margin-right: 4px; }
+.aff-tab.on { color: var(--white); border-bottom-color: var(--accent); }
+.aff-disclaimer { font-size: 11px; color: rgba(255,255,255,0.28); font-family: -apple-system, sans-serif; margin-bottom: 28px; }
+.prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.prod-card { background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.09); padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: background 0.2s; }
+.prod-card:hover { background: rgba(255,255,255,0.09); }
+.prod-img-box { aspect-ratio: 1; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
+.prod-dot { width: 42%; height: 42%; border-radius: 50%; }
+.prod-cat-lbl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-family: -apple-system, sans-serif; }
+.prod-name { font-size: 13px; color: var(--white); font-family: -apple-system, sans-serif; line-height: 1.4; }
+.prod-price { font-size: 12px; color: rgba(255,255,255,0.4); font-family: -apple-system, sans-serif; }
+.prod-btn { margin-top: 8px; padding: 9px 0; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; border: none; cursor: pointer; font-family: -apple-system, sans-serif; font-weight: 500; width: 100%; transition: opacity 0.2s; display: block; text-align: center; text-decoration: none; }
+.prod-btn:hover { opacity: 0.85; }
+.hidden { display: none !important; }
+
+/* INSTAGRAM */
+.ig-divider { padding: 20px 40px 0; display: flex; align-items: center; gap: 16px; }
+.ig-line { flex: 1; height: 0.5px; background: var(--border); }
+.ig-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-family: -apple-system, sans-serif; white-space: nowrap; }
+.ig-row { display: flex; margin-top: 16px; }
+.ig-cell { flex: 1; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-right: 0.5px solid var(--border); position: relative; overflow: hidden; cursor: pointer; text-decoration: none; }
+.ig-cell:last-child { border-right: none; }
+.ig-dot-el { width: 55%; height: 55%; border-radius: 50%; }
+.ig-hover { position: absolute; inset: 0; background: rgba(26,26,24,0); transition: background 0.2s; display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; opacity: 0; }
+.ig-cell:hover .ig-hover { background: rgba(26,26,24,0.28); opacity: 1; }
+.ig-handle { position: absolute; bottom: 8px; left: 10px; font-size: 10px; font-family: -apple-system, sans-serif; color: var(--muted); letter-spacing: 0.05em; }
+
+/* NEWSLETTER */
+.nl { border-top: 0.5px solid var(--border); padding: 60px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.nl-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-family: -apple-system, sans-serif; margin-bottom: 14px; display: block; }
+.nl-title { font-size: 28px; font-weight: 400; line-height: 1.2; margin-bottom: 12px; }
+.nl-desc { font-size: 14px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.8; }
+.nl-form { display: flex; flex-direction: column; gap: 12px; }
+.nl-input { border: 0.5px solid var(--border); padding: 12px 16px; font-size: 14px; font-family: -apple-system, sans-serif; background: var(--white); color: var(--ink); outline: none; }
+.nl-input:focus { border-color: var(--ink); }
+.nl-input::placeholder { color: var(--muted); }
+.nl-btn { background: var(--ink); color: var(--white); border: none; padding: 13px 20px; font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+.nl-btn:hover { opacity: 0.8; }
+.nl-note { font-size: 11px; color: var(--muted); font-family: -apple-system, sans-serif; }
+
+/* FOOTER */
+footer { padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 0.5px solid var(--border); }
+.footer-logo { font-size: 16px; }
+.footer-logo span { color: var(--accent); font-style: italic; }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 11px; color: var(--muted); text-decoration: none; font-family: -apple-system, sans-serif; letter-spacing: 0.04em; }
+.footer-links a:hover { color: var(--ink); }
+.footer-copy { font-size: 11px; color: var(--muted); font-family: -apple-system, sans-serif; }
+
+/* POST PAGE */
+.post-page { display: none; max-width: 720px; margin: 0 auto; padding: 60px 40px; }
+.post-page.active { display: block; }
+.post-page-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-family: -apple-system, sans-serif; margin-bottom: 16px; display: block; }
+.post-page h1 { font-size: 38px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
+.post-page .byline { font-size: 12px; color: var(--muted); font-family: -apple-system, sans-serif; margin-bottom: 40px; border-bottom: 0.5px solid var(--border); padding-bottom: 20px; }
+.post-page p { margin-bottom: 20px; font-size: 16px; line-height: 1.85; }
+.post-page h2 { font-size: 22px; font-weight: 400; margin: 36px 0 14px; }
+.post-page .callout { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 18px 22px; margin: 28px 0; font-family: -apple-system, sans-serif; font-size: 14px; line-height: 1.7; }
+.post-page .callout.gold { background: var(--gold-light); border-left-color: var(--gold); }
+.post-page .affiliate-box { background: var(--ink); color: var(--white); padding: 24px 28px; margin: 32px 0; }
+.post-page .affiliate-box p { font-family: -apple-system, sans-serif; font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+.post-page .affiliate-box a { display: inline-block; background: var(--accent); color: var(--ink); padding: 10px 22px; font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-top: 4px; }
+.back-btn { display: inline-block; font-size: 12px; font-family: -apple-system, sans-serif; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 2px; cursor: pointer; margin-bottom: 36px; background: none; border-top: none; border-left: none; border-right: none; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { min-height: 300px; }
+  .hero-left { padding: 40px 20px; }
+  .hero-title { font-size: 34px; }
+  .posts-grid { grid-template-columns: 1fr; }
+  .prod-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured { grid-template-columns: 1fr; }
+  .nl { grid-template-columns: 1fr; gap: 32px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .section { padding: 40px 20px; }
+  .aff-section { padding: 40px 20px; }
+  .strip { padding: 0 20px; }
+  .ig-divider { padding: 20px 20px 0; }
+  .post-page { padding: 40px 20px; }
+  .post-page h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Buena Vida <span>by Me</span></span>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showHome()">Inicio</a></li>
+    <li><a href="#" onclick="showHome()">Bienestar</a></li>
+    <li><a href="#" onclick="showHome()">Lifestyle</a></li>
+    <li><a href="#" onclick="showHome()">Desarrollo Personal</a></li>
+    <li><a href="#favoritos">Favoritos</a></li>
+    <li><a href="https://instagram.com/buenavida_by_me" target="_blank">Instagram</a></li>
+  </ul>
+  <a href="#newsletter" class="nav-cta sans">Suscribirme</a>
+</nav>
+
+<div id="home-view">
+
+<!-- HERO con foto de Ava -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag sans">Lifestyle · Bienestar · Emprendimiento</span>
+    <h1 class="hero-title">Vivir mejor,<br>ganar <em>más</em>,<br>ser libre.</h1>
+    <p class="hero-subtitle sans">Un espacio donde comparto todo lo que me ayuda a vivir con intención — bienestar, hábitos, libertad financiera y emprendimiento digital.</p>
+    <div class="hero-cats">
+      <span class="cat-pill active sans">Todos</span>
+      <span class="cat-pill sans">Bienestar</span>
+      <span class="cat-pill sans">Lifestyle</span>
+      <span class="cat-pill sans">Desarrollo Personal</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#posts" class="btn-primary sans">Explorar blog</a>
+      <a href="#favoritos" class="btn-ghost sans">Ver mis favoritos →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="foto-ava.jpg" alt="Ava — Buena Vida by Me" class="hero-photo">
+  </div>
+</section>
+
+<!-- CATEGORY STRIP -->
+<div class="strip">
+  <a href="#" class="strip-item"><div class="strip-icon" style="background:var(--accent-light)">🌿</div><span class="strip-name sans">Bienestar</span></a>
+  <a href="#" class="strip-item"><div class="strip-icon" style="background:#EDE8DF">✨</div><span class="strip-name sans">Lifestyle</span></a>
+  <a href="#" class="strip-item"><div class="strip-icon" style="background:var(--gold-light)">🚀</div><span class="strip-name sans">Desarrollo Personal</span></a>
+  <a href="#" class="strip-item"><div class="strip-icon" style="background:#F0EBE0">💰</div><span class="strip-name sans">Libertad Financiera</span></a>
+  <a href="#" class="strip-item"><div class="strip-icon" style="background:#EDE8DF">💻</div><span class="strip-name sans">Emprendimiento Digital</span></a>
+</div>
+
+<!-- AD BAR 1 -->
+<div style="padding:20px 40px 0">
+  <div class="ad-bar">
+    <!-- INSERTA AQUÍ TU CÓDIGO DE GOOGLE ADSENSE -->
+    <p class="sans"><strong>Publicidad</strong> — Inserta aquí tu código de Google AdSense</p>
+    <span class="ad-tag">Pub.</span>
+  </div>
+</div>
+
+<!-- FEATURED con foto del escritorio -->
+<section class="featured" style="margin-top:32px" id="posts">
+  <div class="feat-img">
+    <img src="foto-escritorio.png" alt="Emprendimiento digital — Buena Vida by Me">
+    <span class="feat-badge sans">Destacado</span>
+  </div>
+  <div class="feat-content">
+    <span class="feat-tag sans">🚀 Desarrollo Personal</span>
+    <h2 class="feat-title">Cómo construí un ingreso digital trabajando desde casa — lo que nadie te cuenta</h2>
+    <p class="feat-excerpt sans">No te voy a vender el sueño. Te cuento mi proceso real: los errores, las herramientas que uso y cómo genero ingresos con contenido sin necesitar miles de seguidores.</p>
+    <button onclick="showPost('post3')" class="read-link sans" style="color:var(--gold);border-color:var(--gold);background:none;cursor:pointer;">Leer historia completa →</button>
+  </div>
+</section>
+
+<!-- LATEST POSTS -->
+<section class="section">
+  <div class="section-head">
+    <h2 class="section-title">Últimas entradas</h2>
+    <a href="#" class="section-link sans">Ver todo</a>
+  </div>
+  <div class="posts-grid">
+    <div class="post-card" onclick="showPost('post1')">
+      <div class="post-img" style="background:#EDE8DF"><div class="post-img-circle" style="background:#C9B99E"></div></div>
+      <span class="post-cat-tag sans" style="color:var(--accent)">🌿 Bienestar</span>
+      <h3 class="post-title-txt">Mi rutina de mañana para empezar el día con energía real</h3>
+      <p class="post-excerpt">Los 5 pasos que cambié hace 3 meses — y la diferencia que hacen en mi productividad y estado de ánimo...</p>
+      <span class="post-meta">12 Jun 2026 · 4 min</span>
+      <span class="read-link sans" style="color:var(--accent);border-color:var(--accent)">Leer más →</span>
+    </div>
+    <div class="post-card" onclick="showPost('post2')">
+      <div class="post-img" style="background:var(--gold-light)"><div class="post-img-circle" style="background:var(--gold);opacity:0.5"></div></div>
+      <span class="post-cat-tag sans" style="color:var(--gold)">💰 Libertad Financiera</span>
+      <h3 class="post-title-txt">Las 3 fuentes de ingreso pasivo que estoy construyendo este año</h3>
+      <p class="post-excerpt">Afiliados, productos digitales y contenido patrocinado. Te explico cuánto genera cada uno y qué necesitas para empezar...</p>
+      <span class="post-meta">8 Jun 2026 · 7 min</span>
+      <span class="read-link sans" style="color:var(--gold);border-color:var(--gold)">Leer más →</span>
+    </div>
+    <div class="post-card" onclick="showPost('post3')">
+      <div class="post-img" style="background:#E8E3D8"><div class="post-img-circle" style="background:#B5A48A"></div></div>
+      <span class="post-cat-tag sans" style="color:var(--accent)">✨ Lifestyle</span>
+      <h3 class="post-title-txt">Los 8 productos de bienestar que uso cada semana (sin patrocinios)</h3>
+      <p class="post-excerpt">Solo lo que genuinamente está en mi mesita de noche y me ha funcionado. Links directos de Amazon incluidos...</p>
+      <span class="post-meta">2 Jun 2026 · 5 min</span>
+      <span class="read-link sans" style="color:var(--accent);border-color:var(--accent)">Leer más →</span>
+    </div>
+  </div>
+</section>
+
+<!-- AFFILIATE SECTION -->
+<section class="aff-section" id="favoritos">
+  <span class="aff-tag-lbl sans">Mis recomendaciones</span>
+  <h2 class="aff-title">Productos que amo &amp; uso</h2>
+  <div class="aff-tabs">
+    <button class="aff-tab on sans" data-tab="wellness" onclick="switchTab('wellness')">🌿 Bienestar</button>
+    <button class="aff-tab sans" data-tab="digital" onclick="switchTab('digital')">🚀 Emprendimiento</button>
+    <button class="aff-tab sans" data-tab="lifestyle" onclick="switchTab('lifestyle')">✨ Lifestyle</button>
+  </div>
+  <p class="aff-disclaimer sans">* Este blog contiene links de afiliado de Amazon Associates. Si compras a través de ellos, recibo una pequeña comisión sin costo adicional para ti. Solo recomiendo lo que realmente uso.</p>
+
+  <div class="prod-grid" id="tab-wellness">
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--accent)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--accent)">Bienestar</span>
+      <p class="prod-name">Difusor de aceites esenciales ultrasónico</p>
+      <p class="prod-price">desde $29.99</p>
+      <a href="https://amzn.to/4a7SIUY" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--accent);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#8BAF9E"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#8BAF9E">Fitness</span>
+      <p class="prod-name">Mat de yoga antideslizante premium</p>
+      <p class="prod-price">desde $45.00</p>
+      <a href="https://amzn.to/4acqOHp" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#8BAF9E;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#D4A5C4"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#D4A5C4">Skincare</span>
+      <p class="prod-name">Roller de jade para ritual facial</p>
+      <p class="prod-price">desde $18.99</p>
+      <a href="https://amzn.to/3Shz1ny" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#D4A5C4;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--accent)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--accent)">Hábitos</span>
+      <p class="prod-name">Diario de gratitud y planificación</p>
+      <p class="prod-price">desde $14.99</p>
+      <a href="https://amzn.to/43SMJQe" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--accent);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+  </div>
+
+  <div class="prod-grid hidden" id="tab-digital">
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--gold)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--gold)">Contenido</span>
+      <p class="prod-name">Ring light profesional para creadores</p>
+      <p class="prod-price">desde $39.99</p>
+      <a href="https://amzn.to/4vq6vPi" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--gold);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--gold)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--gold)">Audio</span>
+      <p class="prod-name">Micrófono USB condensador HD</p>
+      <p class="prod-price">desde $59.99</p>
+      <a href="https://amzn.to/3STqEyA" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--gold);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--gold)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--gold)">Home Office</span>
+      <p class="prod-name">Soporte ergonómico para laptop</p>
+      <p class="prod-price">desde $32.00</p>
+      <a href="https://amzn.to/4eWdCsM" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--gold);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:var(--gold)"></div></div>
+      <span class="prod-cat-lbl sans" style="color:var(--gold)">Lectura</span>
+      <p class="prod-name">Padre Rico, Padre Pobre — edición especial</p>
+      <p class="prod-price">desde $16.99</p>
+      <a href="https://amzn.to/4xOFFC3" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:var(--gold);color:var(--ink)">Ver en Amazon →</a>
+    </div>
+  </div>
+
+  <div class="prod-grid hidden" id="tab-lifestyle">
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#A8C4D4"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#A8C4D4">Hogar</span>
+      <p class="prod-name">Lámpara de sal del Himalaya</p>
+      <p class="prod-price">desde $22.99</p>
+      <a href="https://amzn.to/4uRnJUB" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#A8C4D4;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#C4B4D4"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#C4B4D4">Lectura</span>
+      <p class="prod-name">Kindle Paperwhite</p>
+      <p class="prod-price">desde $139.99</p>
+      <a href="https://amzn.to/4em1wJj" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#C4B4D4;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#D4C4A8"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#D4C4A8">Hidratación</span>
+      <p class="prod-name">Botella térmica Stanley</p>
+      <p class="prod-price">desde $34.99</p>
+      <a href="https://amzn.to/4vX4REr" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#D4C4A8;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img-box"><div class="prod-dot" style="background:#B4C4B4"></div></div>
+      <span class="prod-cat-lbl sans" style="color:#B4C4B4">Fitness</span>
+      <p class="prod-name">Bandas de resistencia — set completo</p>
+      <p class="prod-price">desde $24.99</p>
+      <a href="https://amzn.to/4xHPsJY" target="_blank" rel="nofollow sponsored" class="prod-btn sans" style="background:#B4C4B4;color:var(--ink)">Ver en Amazon →</a>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<div class="ig-divider">
+  <div class="ig-line"></div>
+  <span class="ig-label">Sígueme en Instagram · @buenavida_by_me</span>
+  <div class="ig-line"></div>
+</div>
+<div class="ig-row">
+  <a href="https://instagram.com/buenavida_by_me" target="_blank" class="ig-cell" style="background:#EDE8DF"><div class="ig-dot-el" style="background:#C9B99E"></div><div class="ig-hover">♥</div><span class="ig-handle sans">@buenavida_by_me</span></a>
+  <a href="https://instagram.com/buenavida_by_me" target="_blank" class="ig-cell" style="background:#F0EBE0"><div class="ig-dot-el" style="background:var(--gold);opacity:0.4"></div><div class="ig-hover">♥</div></a>
+  <a href="https://instagram.com/buenavida_by_me" target="_blank" class="ig-cell" style="background:#EAE4D8"><div class="ig-dot-el" style="background:#B5A48A"></div><div class="ig-hover">♥</div></a>
+  <a href="https://instagram.com/buenavida_by_me" target="_blank" class="ig-cell" style="background:#F5EDD8"><div class="ig-dot-el" style="background:var(--gold);opacity:0.3"></div><div class="ig-hover">♥</div></a>
+  <a href="https://instagram.com/buenavida_by_me" target="_blank" class="ig-cell" style="background:#ECE6DA"><div class="ig-dot-el" style="background:#A89478"></div><div class="ig-hover">♥</div></a>
+</div>
+
+<!-- AD BAR 2 -->
+<div style="padding:20px 40px">
+  <div class="ad-bar">
+    <!-- INSERTA AQUÍ TU SEGUNDO BLOQUE DE GOOGLE ADSENSE -->
+    <p class="sans"><strong>Publicidad</strong> — Segundo bloque de Google AdSense</p>
+    <span class="ad-tag">Pub.</span>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="nl" id="newsletter">
+  <div>
+    <span class="nl-tag sans">Newsletter semanal</span>
+    <h2 class="nl-title">Una dosis de buena vida en tu bandeja</h2>
+    <p class="nl-desc sans">Cada semana: mis lecturas, productos favoritos, recursos de emprendimiento y reflexiones. Sin spam, solo lo bueno.</p>
+  </div>
+  <div class="nl-form">
+    <input type="text" class="nl-input" placeholder="Tu nombre">
+    <input type="email" class="nl-input" placeholder="tu@email.com">
+    <button class="nl-btn sans">Quiero suscribirme</button>
+    <p class="nl-note">Sin spam. Te puedes dar de baja cuando quieras.</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Buena Vida <span>by Me</span></span>
+  <div class="footer-links">
+    <a href="#">Política de privacidad</a>
+    <a href="#">Divulgación afiliados</a>
+    <a href="#">Publicidad</a>
+    <a href="#">Contacto</a>
+  </div>
+  <span class="footer-copy sans">© 2026 Buena Vida by Me</span>
+</footer>
+
+</div><!-- END HOME VIEW -->
+
+<!-- ===== POST 1 ===== -->
+<div id="post-post1" class="post-page">
+  <button class="back-btn sans" onclick="showHome()">← Volver al blog</button>
+  <span class="post-page-tag sans" style="color:var(--accent)">🌿 Bienestar</span>
+  <h1>Mi rutina de mañana para empezar el día con energía real</h1>
+  <p class="byline">Por Ava · 12 de junio, 2026 · 4 min de lectura</p>
+  <p>Durante años me levanté corriendo, con el teléfono en la mano antes de abrir los ojos. Revisaba emails, notificaciones, mensajes — y en cinco minutos ya estaba en modo reactivo. El día no me pertenecía; le pertenecía a todos los demás.</p>
+  <p>Hace tres meses decidí cambiar eso. No de golpe ni con un plan perfecto — simplemente empecé con un pequeño ajuste y fui sumando de a poco. Hoy te cuento los cinco pasos que transformaron mis mañanas y, con ellos, todo lo demás.</p>
+  <h2>1. Los primeros 10 minutos sin pantallas</h2>
+  <p>El teléfono se queda boca abajo hasta que termino mi rutina. Es la regla más simple y la más poderosa. El cerebro necesita unos minutos para despertar en sus propios términos, sin la avalancha de información externa. Pruébalo solo una semana y me cuentas.</p>
+  <h2>2. Hidratación inmediata — agua con limón antes del café</h2>
+  <p>Suena básico porque lo es. Llevamos horas sin beber nada y el cuerpo lo necesita. Un vaso grande de agua tibia con limón activa la digestión, hidrata las células y le da al organismo la señal de que el día empieza. El café puede esperar veinte minutos.</p>
+  <div class="callout"><strong>Tip:</strong> Preparo el agua con limón la noche anterior y la dejo en la mesita. Sin excusas, sin preparación en la mañana — está ahí lista.</div>
+  <h2>3. Movimiento de 15 minutos — sin negociar</h2>
+  <p>No voy al gym. No hago una hora de yoga. Son 15 minutos de movimiento: stretching, respiración, caminata corta. Lo suficiente para activar la circulación y salir del estado de somnolencia. Uso mi mat de yoga en la sala, sin salir de casa.</p>
+  <div class="affiliate-box">
+    <p>El mat que uso desde hace meses — antideslizante, buen grosor, fácil de limpiar. Una de mis mejores compras del año.</p>
+    <a href="https://amzn.to/4acqOHp" target="_blank" rel="nofollow sponsored">Ver mat en Amazon →</a>
+  </div>
+  <h2>4. Cinco minutos de escritura libre</h2>
+  <p>Abro mi diario y escribo lo que sea — gratitud, intenciones del día, lo que estoy sintiendo. No tiene que tener sentido. El acto de escribir organiza los pensamientos y activa una parte del cerebro que la pantalla no activa. Con el tiempo me di cuenta de que mis mejores ideas del día nacen ahí.</p>
+  <div class="affiliate-box">
+    <p>El diario que uso — con sección de gratitud, intenciones y reflexión nocturna. Simple y sin sobrecarga.</p>
+    <a href="https://amzn.to/43SMJQe" target="_blank" rel="nofollow sponsored">Ver diario en Amazon →</a>
+  </div>
+  <h2>5. Una sola prioridad del día</h2>
+  <p>Antes de revisar cualquier notificación, escribo la única cosa que, si la hago hoy, el día habrá valido la pena. Una sola. No tres, no cinco. Una. Esto cambia completamente cómo distribuyo la energía.</p>
+  <div class="callout"><strong>¿La clave de todo esto?</strong> No es la rutina perfecta — es la consistencia imperfecta. Hay días que hago dos de los cinco pasos. Y está bien. El hábito vive en la intención de volver, no en la ejecución perfecta.</div>
+  <p>¿Tienes alguna rutina de mañana que te funcione? Me encantaría leerla en los comentarios o en Instagram.</p>
+  <p style="margin-top:32px"><em>Con cariño,<br>Ava</em></p>
+  <button class="back-btn sans" onclick="showHome()" style="margin-top:40px">← Volver al blog</button>
+</div>
+
+<!-- ===== POST 2 ===== -->
+<div id="post-post2" class="post-page">
+  <button class="back-btn sans" onclick="showHome()">← Volver al blog</button>
+  <span class="post-page-tag sans" style="color:var(--gold)">💰 Libertad Financiera</span>
+  <h1>Las 3 fuentes de ingreso pasivo que estoy construyendo este año</h1>
+  <p class="byline">Por Ava · 8 de junio, 2026 · 7 min de lectura</p>
+  <p>Voy a ser honesta desde el principio: el "ingreso pasivo" no es tan pasivo como lo venden. Requiere trabajo. Requiere tiempo. Requiere paciencia. Lo que sí es verdad es que, una vez construido, genera dinero mientras duermes, mientras viajas, mientras vives.</p>
+  <p>Este año decidí dejar de depender de una sola fuente de ingresos y empezar a construir otras. Te cuento exactamente qué estoy haciendo, en qué etapa estoy y qué resultados veo hasta ahora.</p>
+  <h2>Fuente 1: Marketing de afiliados (Amazon Associates)</h2>
+  <p>Esta fue la primera y la más rápida de implementar. La idea es simple: recomiendas productos que ya usas, insertas tu link personalizado, y si alguien compra a través de él, recibes una comisión entre el 1% y el 10% dependiendo del producto.</p>
+  <p>Lo que más me gusta de esto es que no necesito inventariar nada, no manejo envíos, no tengo atención al cliente. Solo creo contenido honesto sobre productos reales.</p>
+  <div class="callout gold"><strong>Mis números actuales:</strong> Empecé hace 4 meses. Los primeros dos meses fueron lentos — menos de $50 en total. Hoy estoy generando entre $200 y $400 mensuales, y sube cada mes a medida que el blog crece.</div>
+  <h2>Fuente 2: Productos digitales</h2>
+  <p>Estoy desarrollando mi primer producto digital: una guía descargable de rutinas de mañana y hábitos de bienestar. El costo de producción es básicamente mi tiempo. Una vez publicada, se puede vender infinitas veces. Las plataformas que evalúo: Gumroad y Stan Store.</p>
+  <h2>Fuente 3: Contenido patrocinado</h2>
+  <p>Esta es la que más trabajo requiere al inicio porque depende de construir audiencia primero. Las marcas no pagan por seguidores — pagan por comunidades comprometidas y nichos específicos. Mi nicho (bienestar + emprendimiento femenino) es uno de los más buscados.</p>
+  <div class="callout"><strong>Lo más importante que aprendí:</strong> No intentes construir las tres al mismo tiempo desde cero. Elige una, domínala, y recién entonces suma la siguiente. Yo empecé por los afiliados porque era la más simple de implementar.</div>
+  <p>¿Estás construyendo alguna fuente de ingreso? Escríbeme en Instagram — respondo todo.</p>
+  <p style="margin-top:32px"><em>Con cariño,<br>Ava</em></p>
+  <button class="back-btn sans" onclick="showHome()" style="margin-top:40px">← Volver al blog</button>
+</div>
+
+<!-- ===== POST 3 ===== -->
+<div id="post-post3" class="post-page">
+  <button class="back-btn sans" onclick="showHome()">← Volver al blog</button>
+  <span class="post-page-tag sans" style="color:var(--accent)">✨ Lifestyle</span>
+  <h1>Los 8 productos de bienestar que uso cada semana (sin patrocinios)</h1>
+  <p class="byline">Por Ava · 2 de junio, 2026 · 5 min de lectura</p>
+  <p>Voy a hacer algo que no hacen muchos blogs: decirte que ninguna de las marcas que aparecen aquí me pagó por mencionarlas. Todo lo que está en esta lista lo compré con mi propio dinero y lo uso de verdad, semana a semana.</p>
+  <p>Sí incluyo links de afiliado de Amazon (lo digo siempre), pero eso no cambia lo que recomiendo — solo significa que si decides comprar, yo recibo una comisión pequeña sin costo extra para ti.</p>
+  <h2>1. Difusor de aceites esenciales</h2>
+  <p>Llevo más de un año con el mismo. Lo uso por las mañanas con eucalipto para despertar, y por las noches con lavanda para bajar el ritmo. Transforma completamente el ambiente de un espacio.</p>
+  <div class="affiliate-box"><p>El modelo que tengo — silencioso, dura bien la noche entera, fácil de limpiar.</p><a href="https://amzn.to/4a7SIUY" target="_blank" rel="nofollow sponsored">Ver difusor en Amazon →</a></div>
+  <h2>2. Mat de yoga</h2>
+  <p>Antideslizante de verdad, con buen grosor para las rodillas. Lo uso en casa casi todos los días.</p>
+  <div class="affiliate-box"><p>El mat que uso — una de mis mejores compras del año.</p><a href="https://amzn.to/4acqOHp" target="_blank" rel="nofollow sponsored">Ver mat en Amazon →</a></div>
+  <h2>3. Roller de jade</h2>
+  <p>Lo guardo en el freezer y lo uso por las mañanas para desinflamar. Suena a lujo innecesario pero el efecto es real.</p>
+  <div class="affiliate-box"><p>El roller que tengo — simple, efectivo, precio accesible.</p><a href="https://amzn.to/3Shz1ny" target="_blank" rel="nofollow sponsored">Ver roller en Amazon →</a></div>
+  <h2>4. Diario de planificación</h2>
+  <p>Tiene sección para gratitud, intenciones del día y reflexión nocturna. Mi favorito para la rutina matutina.</p>
+  <div class="affiliate-box" style="background:var(--gold-light);color:var(--ink)"><p style="color:var(--muted)">El diario que uso — simple, con buena estructura.</p><a href="https://amzn.to/43SMJQe" target="_blank" rel="nofollow sponsored" style="background:var(--ink);color:var(--white)">Ver diario en Amazon →</a></div>
+  <h2>5. Botella térmica Stanley</h2>
+  <p>Agua fría 24 horas, caliente 12. Desde que la tengo, ya no tengo que pensar en hidratarme — la botella siempre está al lado.</p>
+  <div class="affiliate-box"><p>La Stanley clásica — funciona de verdad.</p><a href="https://amzn.to/4vX4REr" target="_blank" rel="nofollow sponsored">Ver botella en Amazon →</a></div>
+  <h2>6. Kindle Paperwhite</h2>
+  <p>Sin notificaciones, sin apps, sin distracciones. Solo el libro. Leo más desde que lo tengo que en los últimos tres años.</p>
+  <div class="affiliate-box"><p>El Kindle que cambió mi relación con la lectura.</p><a href="https://amzn.to/4em1wJj" target="_blank" rel="nofollow sponsored">Ver Kindle en Amazon →</a></div>
+  <h2>7. Lámpara de sal del Himalaya</h2>
+  <p>La uso de noche para no encender luces blancas. La luz naranja cálida ayuda al cerebro a entrar en modo descanso. Además es preciosa.</p>
+  <div class="affiliate-box"><p>La lámpara que tengo en mi cuarto — ambiente increíble.</p><a href="https://amzn.to/4uRnJUB" target="_blank" rel="nofollow sponsored">Ver lámpara en Amazon →</a></div>
+  <h2>8. Bandas de resistencia</h2>
+  <p>Para los días que no puedo ir al gym. Set completo por menos de $30 — sin excusas de tiempo ni de dinero.</p>
+  <div class="affiliate-box"><p>El set que tengo — completo y de buena calidad.</p><a href="https://amzn.to/4xHPsJY" target="_blank" rel="nofollow sponsored">Ver bandas en Amazon →</a></div>
+  <div class="callout"><strong>Resumen:</strong> No necesitas comprar los 8 de una vez. Elige uno, el que más resuene contigo, y empieza por ahí. El bienestar es una práctica — los productos solo facilitan el camino.</div>
+  <p>¿Usas alguno de estos? ¿Hay algo que yo no mencioné y que cambió tu rutina? Cuéntame en Instagram.</p>
+  <p style="margin-top:32px"><em>Con cariño,<br>Ava</em></p>
+  <button class="back-btn sans" onclick="showHome()" style="margin-top:40px">← Volver al blog</button>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.aff-tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('[id^="tab-"]').forEach(g => g.classList.add('hidden'));
+  document.querySelector('[data-tab="'+tab+'"]').classList.add('on');
+  document.getElementById('tab-'+tab).classList.remove('hidden');
+}
+function showPost(postId) {
+  document.getElementById('home-view').style.display = 'none';
+  document.querySelectorAll('.post-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('post-'+postId).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showHome() {
+  document.getElementById('home-view').style.display = 'block';
+  document.querySelectorAll('.post-page').forEach(p => p.classList.remove('active'));
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
